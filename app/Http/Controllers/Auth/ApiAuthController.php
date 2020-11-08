@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\SendsAPIResponses;
+use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -42,8 +43,7 @@ class ApiAuthController extends Controller
             'username'    => 'required|string|max:100',
             'password' => 'required|string|min:6',
         ]);
-        if ($validator->fails()) {\Log::error('count', [json_encode($validator->errors()
-                                                                              ->all())]);
+        if ($validator->fails()) {
             return $this->sendErrorAPIResponse(['errors' => $validator->errors()
                                                                       ->all()], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
@@ -83,6 +83,8 @@ class ApiAuthController extends Controller
     {
         $response = ['message' => 'You have been successfully logged in!'];
 
+        $key         = "my-jwt-key";
+        $response = JWT::encode($response, $key, 'HS256');
         return $this->sendSuccessAPIResponse($response, Response::HTTP_OK);
     }
 
