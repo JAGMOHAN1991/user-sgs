@@ -57,7 +57,11 @@ Login user
 url : http://user-sgs/api/login_data
 method: GET
 request Authorization : bearer <token got in previous api>
-
+response <sample> : {
+                        "error": false,
+                        "data": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZXNzYWdlIjoiWW91IGhhdmUgYmVlbiBzdWNjZXNzZnVsbHkgbG9nZ2VkIGluISJ9.P1Nv1vvSmGVH_5tXuTIo8b00GGdQbIqLoKiCmfp8YKw"
+                    }
+    Note: JWT response
 
 Binary Search api:
 url : http://user-sgs/api/binary-search
